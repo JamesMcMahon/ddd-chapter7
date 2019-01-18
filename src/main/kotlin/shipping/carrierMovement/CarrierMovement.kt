@@ -1,6 +1,6 @@
-package carrierMovement
+package shipping.carrierMovement
 
-import location.Location
+import shipping.location.Location
 
 data class CarrierMovement(val scheduleId: String, val from: Location, val to: Location)
 

@@ -1,6 +1,6 @@
-package carrierMovement
+package shipping.carrierMovement
 
-import location.Location
+import shipping.location.Location
 
 interface CarrierMovementRepository {
     fun findByScheduleId(scheduleId: String): CarrierMovement

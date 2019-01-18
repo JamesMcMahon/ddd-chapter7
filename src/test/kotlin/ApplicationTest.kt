@@ -1,15 +1,16 @@
-package cargo
-
-import carrierMovement.CarrierMovement
-import handlingEvent.HandlingEvent
-import handlingEvent.HandlingEventType
-import location.Location
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import shipping.cargo.Cargo
+import shipping.cargo.DeliveryHistory
+import shipping.cargo.DeliverySpecification
+import shipping.carrierMovement.CarrierMovement
+import shipping.handlingEvent.HandlingEvent
+import shipping.handlingEvent.HandlingEventType
+import shipping.location.Location
 import java.time.ZonedDateTime
 import java.util.*
 
-internal class CargoTest {
+internal class ApplicationTest {
     @Test
     fun `changing the destination of a cargo`() {
         val cargo = Cargo(

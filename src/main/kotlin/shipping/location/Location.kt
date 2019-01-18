@@ -1,4 +1,4 @@
-package location
+package shipping.location
 
 import java.util.*
 

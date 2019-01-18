@@ -1,7 +1,7 @@
-package cargo
+package shipping.cargo
 
-import handlingEvent.HandlingEvent
-import location.Location
+import shipping.handlingEvent.HandlingEvent
+import shipping.location.Location
 import java.time.ZonedDateTime
 import java.util.*
 import kotlin.collections.ArrayList

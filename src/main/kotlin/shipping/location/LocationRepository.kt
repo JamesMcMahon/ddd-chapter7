@@ -1,4 +1,4 @@
-package location
+package shipping.location
 
 interface LocationRepository {
     fun findByPortCode(portCode: String): Location

@@ -1,7 +1,7 @@
-package handlingEvent
+package shipping.handlingEvent
 
-import cargo.Cargo
-import carrierMovement.CarrierMovement
+import shipping.cargo.Cargo
+import shipping.carrierMovement.CarrierMovement
 import java.time.ZonedDateTime
 
 data class HandlingEvent(

@@ -1,4 +1,4 @@
-package cargo
+package shipping.cargo
 
 interface CargoRepository {
     fun findByCargoCustomerId(customerId: String): Cargo
