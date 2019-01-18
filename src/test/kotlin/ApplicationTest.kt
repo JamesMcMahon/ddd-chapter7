@@ -1,3 +1,7 @@
+import SampleLocations.Companion.BOSTON
+import SampleLocations.Companion.CHICAGO
+import SampleLocations.Companion.DUBLIN
+import SampleLocations.Companion.LONDON
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import shipping.cargo.Cargo
@@ -6,20 +10,14 @@ import shipping.cargo.DeliverySpecification
 import shipping.carrierMovement.CarrierMovement
 import shipping.handlingEvent.HandlingEvent
 import shipping.handlingEvent.HandlingEventType
-import shipping.location.Location
 import java.time.ZonedDateTime
 import java.util.*
 
 internal class ApplicationTest {
     @Test
-    fun `changing the destination of a cargo`() {
-        val cargo = Cargo(
-            UUID.randomUUID(),
-            DeliverySpecification(ZonedDateTime.now(), Location(UUID.randomUUID(), "abc")),
-            DeliveryHistory()
-        )
-
-        val newDestination = Location(UUID.randomUUID(), "zzz")
+    internal fun `changing the destination of a cargo`() {
+        val cargo = createCargo()
+        val newDestination = DUBLIN
 
         cargo.destination = newDestination
 
@@ -27,19 +25,15 @@ internal class ApplicationTest {
     }
 
     @Test
-    fun `repeat business`() {
-        val cargo = Cargo(
-            UUID.randomUUID(),
-            DeliverySpecification(ZonedDateTime.now(), Location(UUID.randomUUID(), "abc")),
-            DeliveryHistory()
-        )
+    internal fun `repeat business`() {
+        val cargo = createCargo()
 
         cargo.deliveryHistory.addEvent(
             HandlingEvent(
                 cargo,
                 HandlingEventType.LOADING,
                 ZonedDateTime.now(),
-                CarrierMovement("123", Location(UUID.randomUUID(), "Boston"), Location(UUID.randomUUID(), "London"))
+                CarrierMovement("123", BOSTON, LONDON)
             )
         )
 
@@ -50,18 +44,10 @@ internal class ApplicationTest {
     }
 
     @Test
-    fun `adding a handling event`() {
-        val cargo = Cargo(
-            UUID.randomUUID(),
-            DeliverySpecification(ZonedDateTime.now(), Location(UUID.randomUUID(), "abc")),
-            DeliveryHistory()
-        )
+    internal fun `adding a handling event`() {
+        val cargo = createCargo()
 
-        val carrierMovement = CarrierMovement(
-            "id",
-            Location(UUID.randomUUID(), "Boston"),
-            Location(UUID.randomUUID(), "London")
-        )
+        val carrierMovement = CarrierMovement("id", BOSTON, LONDON)
 
         val completionTime = ZonedDateTime.now()
         val expectedHandling = HandlingEvent(
@@ -75,4 +61,10 @@ internal class ApplicationTest {
 
         assertThat(handlingEvent).isEqualTo(expectedHandling)
     }
+
+    private fun createCargo() = Cargo(
+        UUID.randomUUID(),
+        DeliverySpecification(ZonedDateTime.now(), CHICAGO),
+        DeliveryHistory()
+    )
 }
