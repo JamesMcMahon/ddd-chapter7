@@ -4,7 +4,6 @@ import shipping.handlingEvent.HandlingEvent
 import shipping.location.Location
 import java.time.ZonedDateTime
 import java.util.*
-import kotlin.collections.ArrayList
 
 data class Cargo(val id: UUID, var goal: DeliverySpecification, val deliveryHistory: DeliveryHistory) {
     var destination: Location
@@ -16,21 +15,22 @@ data class Cargo(val id: UUID, var goal: DeliverySpecification, val deliveryHist
     fun copyPrototype(id: UUID): Cargo {
         return this.copy(id = id, deliveryHistory = DeliveryHistory())
     }
+
+    fun addEvent(event: HandlingEvent) {
+        this.deliveryHistory.add(event)
+    }
 }
 
 interface CargoFactory {
     fun createMeBro(goal: DeliverySpecification, deliveryHistory: Collection<HandlingEvent>): Cargo
 }
 
-data class DeliveryHistory(private val initialEvents: List<HandlingEvent> = emptyList()) {
-    val events = ArrayList<HandlingEvent>()
+data class DeliveryHistory(private val _events: MutableList<HandlingEvent> = mutableListOf()) {
+    val events: List<HandlingEvent>
+        get() = this._events
 
-    init {
-        this.events.addAll(initialEvents)
-    }
-
-    fun addEvent(event: HandlingEvent) {
-        events.add(event)
+    internal fun add(event: HandlingEvent) {
+        this._events.add(event)
     }
 }
 

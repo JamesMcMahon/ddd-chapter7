@@ -28,7 +28,7 @@ internal class ApplicationTest {
     internal fun `repeat business`() {
         val cargo = createCargo()
 
-        cargo.deliveryHistory.addEvent(
+        cargo.addEvent(
             HandlingEvent(
                 cargo,
                 HandlingEventType.LOADING,
